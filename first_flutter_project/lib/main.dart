@@ -1,5 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'quotes.dart';
+import 'quote_card.dart';
 
 void main() => runApp(MaterialApp(
   home: QuoteList(),
@@ -15,7 +17,7 @@ class _MyWidgetState extends State<QuoteList> {
 
     List<Quote> quotes = [
    Quote(author: 'Major',text: 'Jem kotlety, ręką, bo nie mam czym... Nie mam kobiety.'),
-   Quote(author: 'Konon',text: 'żeby nie było niczego'),
+   Quote(author: 'Konon',text: 'Żeby nie było niczego'),
   ];
 
   @override
@@ -29,13 +31,18 @@ class _MyWidgetState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) =>Text('${quote.text} - ${quote.author}')).toList(),
+        children: quotes.map((quote) =>QuoteCard(
+          quote: quote,
+          delete: () {
+            setState(() {
+              quotes.remove(quote);
+            });
+          }
+        )).toList(),
       ),
     );
   }
 }
-
-
 
 
 
